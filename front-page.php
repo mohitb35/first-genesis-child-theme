@@ -40,6 +40,13 @@ function fgct_home_page_setup() {
 	if( $home_sidebars['call-to-action'] ){
 		add_action('genesis_after_header', 'fgct_show_call_to_action');
 	}
+
+	//* Force full-width-content layout setting
+	add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+
+	// Remove the genesis loop from the home page
+
+	remove_action( 'genesis_loop', 'genesis_do_loop');
 }
 
 
@@ -50,7 +57,7 @@ function fgct_home_page_setup() {
  */
 function fgct_show_home_welcome() {
 	genesis_widget_area( 'home-welcome', array(
-			'before' => '<div class="front-page-1-widget"><div class="wrap">',
+			'before' => '<div class="home-welcome-widget"><div class="wrap">',
 			'after'  => '</div></div>',
 		) );
 }
@@ -63,7 +70,7 @@ function fgct_show_home_welcome() {
  */
 function fgct_show_call_to_action() {
 	genesis_widget_area( 'call-to-action', array(
-			'before' => '<div class="front-page-1-widget"><div class="wrap">',
+			'before' => '<div class="cta-widget"><div class="wrap">',
 			'after'  => '</div></div>',
 		) );
 }

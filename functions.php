@@ -62,9 +62,21 @@ function fgct_setup() {
 	genesis_unregister_layout( 'content-sidebar-sidebar' );
 	genesis_unregister_layout( 'sidebar-content-sidebar' );
 	genesis_unregister_layout( 'sidebar-sidebar-content' );
+
+	// Repositions primary navigation menu.
+	remove_action( 'genesis_after_header', 'genesis_do_nav' );
+	add_action( 'genesis_header', 'genesis_do_nav', 12 );
+
 	
 	require_once( get_stylesheet_directory() . '/includes/widget-areas.php' );
 };
+
+add_action('wp_enqueue_scripts', 'fgct_enqueue_styles');
+
+function fgct_enqueue_styles() {
+	wp_enqueue_style('google_fonts', 'https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap');
+}
+
 
 
 
